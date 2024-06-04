@@ -1,0 +1,26 @@
+version: "3.1"
+services:
+  webapp:
+    image: splitter
+    build: .
+    ports:
+      - "9000:9000"
+    env_file:
+      - .env
+    networks:
+      - "net"
+    depends_on:
+      - database
+  database:
+    image: database
+    build: database/
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    networks:
+      - "net"
+
+networks:
+  net:
+    driver: bridge

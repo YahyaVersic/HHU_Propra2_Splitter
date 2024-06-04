@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Splitter - Ausgabe erstellen</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+        crossorigin="anonymous">
+</head>
+
+<body>
+<!--
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#checkBtn').click(function () {
+      checked = $("input[type=checkbox]:checked").length;
+
+      if (!checked) {
+        alert(
+            "Bitte wählen Sie mindestens eine Person aus, die von dieser Ausgabe profitiert ( ͡° ͜ʖ ͡°)");
+        return false;
+      }
+
+    });
+  });
+</script>-->
+
+<div class="container">
+  <h1>Ausgabe hinzufügen</h1>
+  <form method="post" th:action="@{/gruppenansicht/{id}/ausgabeHinzufuegen(id=${gruppe.id()})}">
+    <!-- Nicht(!!!!!) anfassen, geht kaputt wegen csrf-->
+
+    <div class="form-floating mb-3">
+      <input id="name" type="text" name="name" class="form-control" required="true" maxlength="150">
+      <label for="name">Name der Ausgabe</label>
+    </div>
+    <br>
+    <label for="bezahler">Bezahlt von:</label>
+    <select id="bezahler" name="bezahler" class="form-select">
+      <option th:each="person : ${gruppe.teilnehmer()}" th:value="${person}" th:text="${person}">
+        Dummy
+      </option>
+    </select>
+
+    <div class="form-group">
+      <label for="preis">Preis: </label>
+      <input class="form-control" id="preis" name="preis" type="number" min="0.00" step="0.01"
+             placeholder="69.42" required="true">
+    </div>
+
+
+    <fieldset>
+      <legend>Beteiligte Mitglieder:</legend>
+      <div class="form-check">
+        <p th:each="person:${gruppe.teilnehmer()}">
+          <input name="profiteure" type="checkbox" id="mitglied[]" th:value="${person}"
+                 th:text="${person}" class="form-check-input">
+        </p>
+      </div>
+    </fieldset>
+    <button class="btn btn-primary" method="post" id="checkBtn">Ausgabe hinzufügen</button>
+  </form>
+</div>
+</body>
+</html>

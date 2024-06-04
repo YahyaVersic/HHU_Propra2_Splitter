@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <link rel="icon"
+        href="https://spng.pngfind.com/pngs/s/50-500186_lenny-face-lenny-face-transparent-background-hd-png.png">
+  <meta charset="UTF-8">
+  <title>Splitter - Startseite</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+        crossorigin="anonymous">
+</head>
+
+<body class="container">
+<h1>Splitter</h1>
+<p>Angemeldet als: <strong><span th:text="${gitHandle}">Default name</span></strong></p>
+<a class="btn btn-primary" href="createGroup">
+  <button class="btn btn-primary">Neue Gruppe erstellen</button>
+</a>
+<a class="btn btn-warning" href="schulduebersicht">
+  <button class="btn btn-warning">Übersicht über alle ausstehenden Schulden</button>
+</a>
+
+
+<h2>
+  Deine aktiven Gruppen
+</h2>
+<div class="alert alert-warning" role="alert" th:if="${open_group.isEmpty()}">
+  Du bist aktuell in keiner Gruppe: Erstelle eine neue Gruppe oder lass dich in eine Bestehende
+  hinzufügen!
+</div>
+
+<ul th:each="gruppe : ${open_group}" class="list-group">
+  <li class="list-group-item">
+    <a th:href="@{/gruppenansicht/{name}(name=${gruppe.id()})}" th:text="${gruppe}"></a>
+    <small class="text-muted">(#<span th:text="${gruppe.id()}"></span>)</small>
+  </li>
+</ul>
+
+
+<h2>
+  Deine geschlossenen Gruppen
+</h2>
+<ul th:each="gruppe : ${closed_group}" class="list-group">
+  <li class="list-group-item">
+    <a th:href="@{/gruppenansicht/{name}(name=${gruppe.id()})}" th:text="${gruppe}"></a>
+  </li>
+</ul>
+<div class="alert alert-info" role="alert" th:if="${closed_group.isEmpty()}">
+  Noch keine Gruppe geschlossen
+</div>
+
+
+</body>
+</html>

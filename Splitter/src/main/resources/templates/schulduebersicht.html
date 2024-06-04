@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Splitter - Schuldübersicht</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+        crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+  <h1>Übersicht über alle ausstehenden Schulden</h1>
+  <a href="/persoenlicheUebersicht">
+    <button class="btn btn-primary">Zurück zur Gruppenübersicht</button>
+  </a>
+
+  <h2>
+    Geld, dass Sie noch bezahlen müssen
+  </h2>
+  <p class="alert alert-info" th:if="${schuldenZuZahlen.isEmpty()}">
+    Sie haben derzeit keine offenen Schulden.
+  </p>
+  <table class="table table-hover" th:if="${!schuldenZuZahlen.isEmpty()}">
+    <tr>
+      <th>Betrag</th>
+      <th>Empfänger</th>
+      <th>Aus Gruppe</th>
+    </tr>
+    <tr th:each="schuld : ${schuldenZuZahlen}">
+      <td th:text="${schuld.geld()}"></td>
+      <td th:text="${schuld.empfaenger()}"></td>
+      <td th:text="${schuld.gruppenname()}"></td>
+    </tr>
+  </table>
+  <h2>
+    Geld, dass Sie empfangen werden
+  </h2>
+  <p class="alert alert-warning" th:if="${schuldenZuEmpfangen.isEmpty()}">
+    Ihnen wird derzeit nichts geschuldet.
+  </p>
+  <table class="table table-hover" th:if="${!schuldenZuEmpfangen.isEmpty()}">
+    <tr>
+      <th>Betrag</th>
+      <th>Geschuldet von</th>
+      <th>Aus Gruppe</th>
+    </tr>
+    <tr th:each="schuld : ${schuldenZuEmpfangen}">
+      <td th:text="${schuld.geld()}"></td>
+      <td th:text="${schuld.zahler()}"></td>
+      <td th:text="${schuld.gruppenname()}"></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

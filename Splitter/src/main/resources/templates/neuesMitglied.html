@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Splitter - Neues Mitglied hinzufügen</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+
+<body class="container">
+
+
+<h1>Neues Mitglied hinzufügen</h1>
+<p>
+  Hier kannst du ein neues Mitglied in die Gruppe <strong>"<span th:text="${gruppenname}">Dummy-Gruppe</span>"</strong> hinzufügen.
+</p>
+<p class="alert alert-info">
+  Bitte lass dir dafür von deinem/deiner Freund*in seinen/ihren GitHub Handle geben.
+</p>
+<p>
+  <strong>Folgende Regeln gelten für GitHub Namen:</strong>
+</p>
+<ul>
+  <li>Ein valider GitHub Username besteht aus beliebigen Zahlen und Buchstaben.</li>
+  <li>Umlaute (ä/ö/ü) sind nicht erlaubt.</li>
+  <li>Die Groß-/Kleinschreibung spielt keine Rolle.</li>
+  <li>Neben Buchstaben und Zahlen sind auch Bindestriche (-) erlaubt, es dürfen aber keine zwei Bindestriche
+      aufeinander folgen und ein Handle kann nicht mit einem Bindestrich anfangen/enden.</li>
+</ul>
+<form method="post" th:action="mitgliedHinzufuegen">
+  <div class="form-floating mb-3">
+    <input type="text" id="name" name="name" class="form-control" required pattern="(?:[a-zA-Z\d]|(?:[a-zA-Z\d]|-(?=[a-zA-Z\d])){0,38}[a-zA-Z\d])$">
+    <label for="name">GitHub Handle</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Mitglied hinzufügen</button>
+</form>
+
+</body>
+</html>

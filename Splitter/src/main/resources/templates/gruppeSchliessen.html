@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Splitter - Gruppe schliessen</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+        crossorigin="anonymous">
+</head>
+<body class="container">
+<h1>Gruppe <strong th:text="${gruppenname}">Dummy-Gruppenname</strong> schliessen</h1>
+<a th:href="@{'/gruppenansicht/'+${gruppenID}}">
+  <button class="btn btn-primary">Zurück zur Gruppenübersicht</button>
+</a>
+<p>Sind Sie sich sicher, dass Sie die Gruppe schliessen wollen?</p>
+
+
+<p class="alert alert-danger">
+  Achtung: Sobald die Gruppe geschlossen ist, können keine Änderungen mehr vorgenommen werden.
+  Es ist weiter möglich, die Gruppenübersicht einzusehen.
+</p>
+<form method="post" th:action="@{'/gruppenansicht/'+${gruppenID}+'/gruppeSchliessen'}">
+  <button type="submit" class="btn btn-primary">Gruppe schliessen</button>
+</form>
+
+
+</body>
+</html>
